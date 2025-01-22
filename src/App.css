@@ -1,0 +1,78 @@
+.App{
+  color: white;
+}
+.cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.register, .login, .userDetail, .foundReport, .lostReport{
+  justify-content: center;
+  color: black;
+}
+.register button, .login button{
+  justify-content: center;
+}
+.navbar{
+  padding-top: 10px;
+  background-color: rgb(20, 20, 20);
+  color: #cccccc;
+  padding-bottom: 50px;
+  font-size: 17px;
+}
+.hero{
+  margin-bottom: 60px;
+  /* background-color: rgb(17,17,17); */
+}
+.hero .title{
+  font-size: 3.4rem;
+  color: #cccccc;
+}
+.navbar a{
+  color: #cccccc;
+}
+.navbar .py-4{
+  padding-left: 0px;
+  /* padding-right: 0px; */
+}
+.allproducts{
+  margin-top: 50px;
+}
+.filters{
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.filters input{
+  width: 650px;
+  /* width: 810px; */
+  padding: 13px;
+  outline: none;
+  border-radius: 6px;
+  background-color: rgb(28, 28, 28);
+}
+.filters select{
+  background-color: rgb(28, 28, 28);
+  padding: 13px;
+  border-radius: 6px;
+  margin-right: 12px;
+}
+.myReports table{
+  text-align: left;
+}
+.myReports table img{
+  border-radius: 6px;
+}
+
+.admin li{
+  cursor: pointer;
+}
+#foundImg{
+  object-fit: cover;
+}
