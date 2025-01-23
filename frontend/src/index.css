@@ -1,0 +1,38 @@
+* {
+  font-family: "DM Sans",sans-serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+  margin-left: 56px;
+  margin-right: 56px;
+  background-color: rgb(20, 20, 20);
+  font-family: sans-serif;
+  box-sizing: border-box;
+  color: white;
+  overflow-x: hidden;
+}
+h2{
+  color: #cccccc;
+  font-size: 26px;
+}
+hr {
+  border: none; /* Remove default border */
+  height: 1px; /* Very thin line */
+  background-color: #666565; /* Light grey color */
+}
+details{
+  width: fit-content;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+details p{
+  padding: 20px;
+  font-size: 18px;
+}
+.admin{
+  margin-left: -56px;
+  margin-right: -56px;
+  color: black;
+}

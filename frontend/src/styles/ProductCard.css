@@ -1,0 +1,53 @@
+h2 {
+  color: #cccccc;
+}
+.card {
+  min-width: 390px;
+  max-width: 390px;
+  height: 430px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  color: white;
+  margin-right: 12px;
+  margin-bottom: 30px;
+}
+.sub1 {
+  width: 100%;
+  height: 360px;
+  border-radius: 22px;
+  overflow: hidden;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s ease-in-out;
+}
+.card img:hover {
+  transform: scale(1.07);
+}
+.card p {
+  margin: 0px;
+}
+.subInfo h3,
+.subInfo p {
+  margin: 0;
+  padding: 0;
+}
+.subInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.subInfo h3 {
+  font-size: 21px;
+  margin-top: 10px;
+  margin-bottom: 3px;
+  color: rgb(204, 204, 204);
+}
+.sub2 p {
+  color: rgb(158, 158, 158);
+  font-size: 16px;
+  margin-top: 5px;
+}
