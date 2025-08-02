@@ -42,7 +42,7 @@ function MyClaimRequests() {
   return (
     <div className="products allproducts">
       <div className="filters">
-        <h2>My Claim Requests</h2>
+        <h2 style={{fontSize: '26px'}}>My Claim Requests</h2>
         <input
           type="search"
           name="search"

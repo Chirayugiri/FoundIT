@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
   font-family: "DM Sans",sans-serif;
 }
@@ -9,6 +5,11 @@ style h2{
   font-size: none;
   font-weight: none;
 }
+/* h1, h2, h3, h4, h5, h6 {
+  font-size: revert !important;
+  font-weight: revert !important;
+} */
+
 body {
   margin: 0;
   padding: 0;

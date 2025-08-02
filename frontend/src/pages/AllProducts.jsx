@@ -66,7 +66,7 @@ function AllProducts() {
   return (
     <div className="products allproducts">
       <div className="filters">
-        <h2>Found Items</h2>
+        <h2 style={{fontSize: '26px'}}>Found Items</h2>
         <input
           type="search"
           name="search"
@@ -108,18 +108,6 @@ function AllProducts() {
             No items found
           </div>
         ) : (
-          // filteredItems.map((item) => (
-          //   <Link to="/productDetail" state={{ item }} key={item.uid}>
-          //     <ProductCard
-          //       key={item.id}
-          //       path={item.imageUrl}
-          //       title={item.title}
-          //       date={formatDate(item.date)}
-          //       category={item.itemType}
-          //     />
-          //   </Link>
-          // ))
-
           filteredItems.filter(item => item.status === "pending").map((item) => 
                         (
                             <Link to='/productDetail' state={{ item }} key={item.uid}>

@@ -18,7 +18,7 @@ function Category({ state }) {
 
     return (
         <div className="category">
-            <h2>Explore Lost Items by Category</h2>
+            <h2 style={{fontSize: '26px'}}>Explore Lost Items by Category</h2>
             <p id="cat-p1">Browse through the categories to find your lost items.</p>
 
             <div className="flex">
