@@ -5,7 +5,7 @@ function Bar(props) {
 
   return (
     <div className="bar">
-      <h2>{props.title} Items</h2>
+      <h2 style={{fontSize: '26px', fontWeight: 'bold'}}>{props.title} Items</h2>
       {/* Use navigate function correctly */}
       <a href="#"
         onClick={(e) => {

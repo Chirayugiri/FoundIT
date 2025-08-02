@@ -112,7 +112,7 @@ function CategoryProduct() {
   return (
     <div className="products allproducts">
       <div className="filters">
-        <h2 style={{fontSize: '26px'}}>Found Items</h2>
+        <h2 style={{fontSize: '26px', fontWeight: 'bold'}}>Found Items</h2>
         <input
           type="search"
           name="search"
