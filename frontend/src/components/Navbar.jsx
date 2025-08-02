@@ -10,16 +10,16 @@ function Navbar() {
                         FoundIT
                     </div>
                     <nav className="space-x-6">
-                        <a className="text-gray-600 hover:text-blue-600" href="#">
+                        {/* <a className="text-gray-600 hover:text-blue-600" href="#">
                             Home
-                        </a>
-                        <a className="text-gray-600 hover:text-blue-600" href="#">
+                        </a> */}
+                        {/* <a className="text-gray-600 hover:text-blue-600" href="#">
                             Lost Items
                         </a>
                         <a className="text-gray-600 hover:text-blue-600" href="#">
                             Found Items
-                        </a>
-                        <button
+                        </a> */}
+                        {/* <button
                             className="text-blue-600 hover:text-blue-700 cursor-pointer bg-transparent border-none p-0"
                             onClick={() => {
                                 localStorage.clear();
@@ -27,7 +27,9 @@ function Navbar() {
                             }}
                             >
                             Logout
-                        </button>
+                        </button> */}
+
+                        {/* className="bg-blue-600 text-white px-4 py-2 rounded" */}
 
 
                     </nav>
@@ -35,9 +37,15 @@ function Navbar() {
                         <Link to='/myclaimrequest' className="text-gray-600 hover:text-blue-600">
                             My Requests
                         </Link>
-                        <Link to='/mylostreports' className="bg-blue-600 text-white px-4 py-2 rounded">
-                            My Reports
-                        </Link>
+                        <button
+                            className="bg-blue-600 text-white px-4 py-2 rounded"
+                            onClick={() => {
+                                localStorage.clear();
+                                window.location.href = "/login";
+                            }}
+                            >
+                            Logout
+                        </button>
                     </div>
                 </div>
             </header>
