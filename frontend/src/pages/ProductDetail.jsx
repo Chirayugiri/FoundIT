@@ -25,7 +25,7 @@ function ProductDetail() {
         async function fetchItemDetails() {
             console.log("Fetching item details for ID:", itemId);
             try {
-                const res = await fetch(`http://localhost:9000/product/item/${itemId}`);
+                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/product/item/${itemId}`);
                 const data = await res.json();
                 setItem(data.item);
             } catch (error) {
@@ -35,7 +35,7 @@ function ProductDetail() {
 
         async function checkIfRequested() {
             try {
-                const res = await fetch("http://localhost:9000/user/isrequested", {
+                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/isrequested`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ function ProductDetail() {
 
     async function sendClaimRequest() {
         try {
-            const res = await fetch("http://localhost:9000/user/claim", {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/claim`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

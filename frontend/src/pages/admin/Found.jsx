@@ -11,7 +11,7 @@ function Found() {
     useEffect(() => {
         async function fetchAllItems() {
             try {
-                const result = await fetch("http://localhost:9000/product/allProducts", {
+                const result = await fetch(`${process.env.REACT_APP_BACKEND_URL}/product/allProducts`, {
                     method: "GET",
                 });
                 const data = await result.json();
@@ -38,7 +38,7 @@ function Found() {
 
     async function getUserDetails(uid) {
         try {
-            const response = await fetch(`http://localhost:9000/user/${uid}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/${uid}`);
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
             }
@@ -60,7 +60,7 @@ function Found() {
     async function changeItemStatus(id) {
         console.log(id);
         try {
-            const response = await fetch(`http://localhost:9000/product/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/product/${id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

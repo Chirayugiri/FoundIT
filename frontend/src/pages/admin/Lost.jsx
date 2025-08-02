@@ -9,7 +9,7 @@ function Lost() {
     useEffect(() => {
         async function fetchAllItems() {
             try {
-                const response = await fetch("http://localhost:9000/product/lost", {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/product/lost`, {
                     method: "GET",
                 });
                 const data = await response.json();
@@ -37,7 +37,7 @@ function Lost() {
 
     async function getUserDetails(uid) {
         try {
-            const response = await fetch(`http://localhost:9000/user/${uid}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/${uid}`);
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
             }

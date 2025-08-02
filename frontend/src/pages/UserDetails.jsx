@@ -37,7 +37,7 @@ function UserDetails() {
         console.log("Data to send: ", data);
     
         try {
-            const response = await fetch('http://localhost:9000/user/addUser', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/addUser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

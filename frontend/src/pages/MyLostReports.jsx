@@ -12,7 +12,7 @@ function MyLostReports() {
     console.log("Curr user id: ",currUserId);
 
     async function getLostReports() {
-        const response = await fetch(`http://localhost:9000/product/reports/${currUserId}`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/product/reports/${currUserId}`);
         const data = await response.json();
         setItems(data);
         console.log(data);

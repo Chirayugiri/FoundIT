@@ -7,7 +7,7 @@ function Students() {
     useEffect(() => {
         async function fetchAllUsers() {
             try {
-                const result = await fetch("http://localhost:9000/user/all", {
+                const result = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/all`, {
                     method: "GET",
                 });
                 const data = await result.json();

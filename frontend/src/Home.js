@@ -29,7 +29,7 @@ function Home() {
         async function fetchAllItems() {
             setLoading(true)
             try {
-                const result = await fetch('http://localhost:9000/product/allProducts', {
+                const result = await fetch('${process.env.REACT_APP_BACKEND_URL}/product/allProducts', {
                     method: 'GET',
                 });
                 const data = await result.json(); 
@@ -43,7 +43,7 @@ function Home() {
 
         async function fetchRecentItems() {
             try {
-                const result = await fetch('http://localhost:9000/product/recent', {
+                const result = await fetch('${process.env.REACT_APP_BACKEND_URL}/product/recent', {
                     method: 'GET',
                 });
                 const data = await result.json(); 

@@ -13,7 +13,7 @@ function MyClaimRequests() {
   useEffect(() => {
     async function getMyClaimRequests() {
       try {
-        const response = await fetch(`http://localhost:9000/user/claim/${currUserId}`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/claim/${currUserId}`);
         const data = await response.json();
         if (Array.isArray(data)) {
           setItems(data);
