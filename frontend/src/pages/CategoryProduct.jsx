@@ -17,7 +17,7 @@ function CategoryProduct() {
   useEffect(() => {
     async function fetchAllItems() {
       try {
-        const result = await fetch("${process.env.REACT_APP_BACKEND_URL}/product/allProducts", {
+        const result = await fetch(`${process.env.REACT_APP_BACKEND_URL}/product/allProducts`, {
           method: "GET",
         });
         const data = await result.json();

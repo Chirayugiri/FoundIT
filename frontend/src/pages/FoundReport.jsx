@@ -26,7 +26,7 @@ function FoundReport() {
         formData.append("isFoundItem", true);
 
         try{
-            const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/product/upload', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/product/upload`, {
                 method: 'POST',
                 body: formData,
             });
