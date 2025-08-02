@@ -8,8 +8,9 @@
   gap: 50px;
 }
 .right img {
-  mix-blend-mode: lighten;
-  width: 400px;
+  mix-blend-mode: exclusion;
+  color: white;
+  width: 100px;
 }
 .footer-bottom {
   background-color: #1d1d1d;

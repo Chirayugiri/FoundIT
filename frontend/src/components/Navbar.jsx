@@ -19,9 +19,17 @@ function Navbar() {
                         <a className="text-gray-600 hover:text-blue-600" href="#">
                             Found Items
                         </a>
-                        <a className="text-gray-600 hover:text-blue-600" href="#">
-                            About
-                        </a>
+                        <button
+                            className="text-blue-600 hover:text-blue-700 cursor-pointer bg-transparent border-none p-0"
+                            onClick={() => {
+                                localStorage.clear();
+                                window.location.href = "/login";
+                            }}
+                            >
+                            Logout
+                        </button>
+
+
                     </nav>
                     <div className="space-x-4">
                         <Link to='/myclaimrequest' className="text-gray-600 hover:text-blue-600">

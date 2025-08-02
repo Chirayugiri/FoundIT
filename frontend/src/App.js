@@ -15,7 +15,8 @@ import MyClaimRequests from './pages/MyClaimRequests';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 
 function App() {
-  // const user = localStorage.getItem("email")
+  const user = localStorage.getItem("email")
+  console.log("user: ", user);
   return (
     <div className="App">
       <Routes>

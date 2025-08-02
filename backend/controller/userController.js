@@ -20,10 +20,10 @@ async function addUser(req,res) {
         };
         const docRef = await doc(usersCollectionRef, uid);
         await setDoc(docRef, formData);
-        res.status(201).json({ message: 'user created'});
+        return res.status(201).json({ message: 'user created'});
     } catch(err){
         console.log(err);
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 }
 
@@ -33,10 +33,10 @@ async function getUser(req,res){
         const docRef = await doc(usersCollectionRef, uid)
         const user = (await getDoc(docRef)).data();
 
-        res.json(user);
+        return res.json(user);
     } catch(err){
         console.log(err);
-        res.json({"error": err});
+        return res.json({"error": err});
     }
 }
 
@@ -45,9 +45,9 @@ async function getAllUsers(req,res){
         const querySnap = await getDocs(usersCollectionRef);
         const users = querySnap.docs.map((doc)=> doc.data());
 
-        res.json(users);
+        return res.json(users);
     } catch(err){
-        res.json({"error": err});
+        return res.json({"error": err});
     }
 }
 
@@ -57,9 +57,9 @@ async function deleteUser(req,res) {
         const docRef = await doc(db, usersCollectionRef, id);
         await deleteDoc(docRef);
 
-        res.json({ message: `Document with ID ${id} deleted successfully` });
+        return res.json({ message: `Document with ID ${id} deleted successfully` });
     } catch(err){
-        res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: err.message });
     }
 }
 
@@ -76,10 +76,10 @@ async function addClaimRequest(req,res) {
             claimRequests: arrayUnion(itemDocId)
         });
 
-        res.status(200).json({"uid": itemDocId});
+        return res.status(200).json({"uid": itemDocId});
     } catch(err){
         console.log(err);
-        res.status(501).json(err);
+        return res.status(501).json(err);
     }
 }
 
@@ -106,10 +106,10 @@ async function getClaimRequests(req,res) {
             })
         );
 
-        res.status(200).json(items.filter(Boolean)); // Filter out null and return items
+        return res.status(200).json(items.filter(Boolean)); // Filter out null and return items
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Error fetching claimed documents", error: err });
+        return res.status(500).json({ message: "Error fetching claimed documents", error: err });
     }
 }
 
@@ -118,20 +118,20 @@ async function isClaimRequestSent(req,res) {
         const {currUserDocId, itemDocId} = req.body;
         const userDoc = await getDoc(doc(db, "users", currUserDocId));
         if(!userDoc.exists()){
-            res.status(400).json("User doc does not exists");
+            return res.status(400).json("User doc does not exists");
         }
         const claimRequest = userDoc.data().claimRequests;
 
         if(claimRequest.includes(itemDocId)){
-            res.status(200).json({exists: true});
+            return res.status(200).json({exists: true});
         }
         else{
-            res.status(200).json({exists: false});
+            return res.status(200).json({exists: false});
         }
 
     } catch(err){
         console.error(err);
-        res.status(501).json(err);
+        return res.status(501).json(err);
     }
 }
 

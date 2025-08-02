@@ -13,7 +13,8 @@ function Login() {
 
     try{
       await signInWithEmailAndPassword(auth, email, pass); 
-      localStorage.setItem("email", email);
+      localStorage.setItem("userID", auth.currentUser?.uid);
+      localStorage.setItem("email", auth.currentUser?.email);
       console.log(localStorage.getItem("email"))
       console.log('user logged in');
       navigate('/')
@@ -25,6 +26,7 @@ function Login() {
   async function signInWithGoogle(){
     try{
       await signInWithPopup(auth, googleProvider);
+      localStorage.setItem("userID", auth.currentUser?.uid);
       localStorage.setItem("email", auth.currentUser?.email);
       console.log('logged in with google');
       console.log(auth);

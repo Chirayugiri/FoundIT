@@ -40,7 +40,8 @@ function Footer() {
           </a>
         </div>
         <div className="right">
-          <img src="logo.jpg" alt="Logo" />
+          <h1 style={{color: "#2563eb", fontWeight: 700, fontSize: "2rem", lineHeight: "2rem", marginRight: "30px"}}>FoundIT</h1>
+          {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH7ZlVkYhGo4keX-fsKuAhCIo1HuA5HrOO5w&s" alt="Logo" width="30px" /> */}
         </div>
       </div>
       <hr />

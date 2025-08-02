@@ -1,5 +1,5 @@
 const { auth, db, storage, foundCollectionRef, lostCollectionRef } = require('../config.js');
-const { doc, getDocs, addDoc, deleteDoc, Timestamp, query, where, setDoc, updateDoc } = require('firebase/firestore');
+const { doc, getDocs, addDoc, deleteDoc, Timestamp, query, where, getDoc, updateDoc } = require('firebase/firestore');
 
 async function getAllProducts(req, res) {
     try {
@@ -22,12 +22,15 @@ async function getRecentProducts(req, res) {
         const fiveDaysAgo = new Date();
         fiveDaysAgo.setDate(currentDate.getDate() - 5);
 
-        // Query to fetch documents with 'date' within the last 5 days
+        // fetch documents of last 5 days
         const querySnap = await getDocs(
             query(foundCollectionRef, where("date", ">=", Timestamp.fromDate(fiveDaysAgo)))
         );
 
-        const recentItems = querySnap.docs.map((doc) => doc.data());
+        const recentItems = querySnap.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
         res.json(recentItems);
     } catch (err) {
         console.log(err);
@@ -60,14 +63,15 @@ async function uploadProduct(req, res) {
             console.log('No file');
             return res.status(400).send("No file uploaded.");
         }
-        // Prepare form data for Firestore
+        
         const formData = {
             uid: req.body.uid,
             title: req.body.title,
             location: req.body.location,
             desc: req.body.desc,
             itemType: req.body.itemType,
-            imageUrl: file ? file.path : "NA",  // Set "NA" if no file is uploaded (if 'NA' then it is for lostReport collection else in start of func we will tell user it is mandatory)
+            imageUrl: file ? file.path : "NA", 
+            status: "pending", // Default status
             date: Timestamp.fromDate(new Date())
         };
 
@@ -157,6 +161,28 @@ async function changeProductStatus(req, res) {
     }
 }
 
+async function getProductByID(req, res){
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ message: 'Item ID is required' });
+  }
+
+  try {
+    const itemRef = doc(db, "foundReport", id);
+    const itemDoc = await getDoc(itemRef);
+
+    if (!itemDoc.exists) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+
+    return res.status(200).json({ item: { id: itemDoc.id, ...itemDoc.data() } });
+  } catch (error) {
+    console.error('Error fetching item:', error); 
+    return res.status(500).json({ message: 'Server error' });
+  }
+}
+
 module.exports = {
     getAllProducts, 
     getCategoryProducts, 
@@ -165,5 +191,6 @@ module.exports = {
     getRecentProducts, 
     getLostReports, 
     changeProductStatus, 
-    getAllLostReports
+    getAllLostReports,
+    getProductByID
 }

@@ -62,17 +62,18 @@ function Home() {
         <>
             <Hero />
             <Category state={{ items }} />
-            <Link to='/allproducts' state={{ items }}><Bar title={"Recent"} /></Link>
 
-            <div className='flex'>
+            <Link to='/allproducts' state={{ items }}><Bar title={"Recent"} /></Link>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
                 {
-                    isLoading === true ? <Loader /> 
-                    :
-                    // if no recent items then show 3 items from items array
-                    recentItems.length == 0 ?
-                        items.slice(0, 3).map((item) => {
-                            return (
-                                <Link to='/productDetail' state={{ item }} key={item.uid}>
+                    isLoading ? (
+                        <Loader />
+                    ) : recentItems.filter(item => item.status === "pending").length > 0 ? (
+                        recentItems
+                        .filter(item => item.status === "pending")
+                        .slice(0, 3)
+                        .map((item, index) => (
+                            <Link to='/productDetail' state={{ item }} key={`recent-${item.uid}-${index}`}>
                                     <ProductCard
                                         path={item.imageUrl}
                                         title={item.title}
@@ -80,11 +81,13 @@ function Home() {
                                         category={item.itemType}
                                     />
                                 </Link>
-                            );
-                        }) :
-                        recentItems.slice(0, 3).map((item) => {
-                            return (
-                                <Link to='/productDetail' state={{ item }} key={item.uid}>
+                            ))
+                    ) : (
+                        items
+                        .filter(item => item.status === "pending")
+                        .slice(0, 6)
+                        .map((item, index) => (
+                            <Link to='/productDetail' state={{ item }} key={`found-${item.uid}-${index}`}>
                                     <ProductCard
                                         path={item.imageUrl}
                                         title={item.title}
@@ -92,9 +95,10 @@ function Home() {
                                         category={item.itemType}
                                     />
                                 </Link>
-                            );
-                        })
+                            ))
+                    )
                 }
+
             </div>
 
 
@@ -103,9 +107,9 @@ function Home() {
                 {
                     isLoading === true ? <Loader /> 
                     :
-                    items.slice(0, 6).map((item) => {
+                    items.filter(item => item.status === "pending").slice(0, 6).map((item, index) => {
                         return (
-                            <Link to='/productDetail' state={{ item }} key={item.uid}>
+                            <Link to='/productDetail' state={{ item }} key={`found-${item.uid}-${index}`}>
                                 <ProductCard
                                     path={item.imageUrl}
                                     title={item.title}

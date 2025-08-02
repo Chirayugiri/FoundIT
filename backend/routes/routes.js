@@ -7,7 +7,8 @@ const {
     getRecentProducts, 
     getLostReports,
     changeProductStatus,
-    getAllLostReports
+    getAllLostReports,
+    getProductByID
 } = require('../controller/productController');
 const {addUser, getAllUsers, deleteUser, getUser, addClaimRequest, getClaimRequests, isClaimRequestSent} = require('../controller/userController');
 const cloudinaryUpload = require('../multerSetup.js');
@@ -24,6 +25,8 @@ productRouter.delete('/:id', deleteProduct);
 productRouter.get('/reports/:uid', getLostReports);
 productRouter.post('/:uid', changeProductStatus);
 productRouter.get('/lost', getAllLostReports);
+productRouter.get('/item/:id', getProductByID);
+
 
 // /user/
 userRouter.post('/addUser', addUser);

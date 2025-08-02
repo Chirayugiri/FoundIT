@@ -108,17 +108,30 @@ function AllProducts() {
             No items found
           </div>
         ) : (
-          filteredItems.map((item) => (
-            <Link to="/productDetail" state={{ item }} key={item.uid}>
-              <ProductCard
-                key={item.id}
-                path={item.imageUrl}
-                title={item.title}
-                date={formatDate(item.date)}
-                category={item.itemType}
-              />
-            </Link>
-          ))
+          // filteredItems.map((item) => (
+          //   <Link to="/productDetail" state={{ item }} key={item.uid}>
+          //     <ProductCard
+          //       key={item.id}
+          //       path={item.imageUrl}
+          //       title={item.title}
+          //       date={formatDate(item.date)}
+          //       category={item.itemType}
+          //     />
+          //   </Link>
+          // ))
+
+          filteredItems.filter(item => item.status === "pending").map((item) => 
+                        (
+                            <Link to='/productDetail' state={{ item }} key={item.uid}>
+                                <ProductCard
+                                    path={item.imageUrl}
+                                    title={item.title}
+                                    date={formatDate(item.date)}
+                                    category={item.itemType}
+                                />
+                            </Link>
+                        )
+                    )
         )}
       </div>
     </div>

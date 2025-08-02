@@ -58,7 +58,7 @@ function MyClaimRequests() {
             <p>No Reports Found!</p>
           </div>
         ) : (
-          <table className="w-full">
+          <table className="w-[75%] mx-auto">
             <thead>
               <tr className="text-left text-gray-500">
                 <th className="py-2">Photo</th>
@@ -79,12 +79,12 @@ function MyClaimRequests() {
 
                     return (
                       <tr
-                        className="border-t cursor-pointer"
+                        className="border-t cursor-pointer mb-50"
                         onClick={() => navigate('/productDetail', { state: { item } })}
                         key={item.uid}
                       >
                         <td className="py-2">
-                          <img alt="img" height="90px" src={imgSrc} width="100px" />
+                          <img alt="img" height="50px" src={imgSrc} width="90px" />
                         </td>
                         <td className="py-2">{item.title}</td>
                         <td className="py-2">{formatDate(item.date)}</td>

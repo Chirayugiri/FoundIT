@@ -1,101 +1,111 @@
 import React, { useEffect, useState } from "react";
 import "../styles/ProductDetails.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { auth } from "../Config/config";
 
 function ProductDetail() {
-    const navigate = useNavigate();
     const location = useLocation();
-    const { item } = location.state || {}; // Retrieve the specific item passed
-
-    console.log(item);
-
+    const itemId = location.state?.item?.id || null; // only pass item ID through Link
     const currUserId = auth?.currentUser?.uid;
-    const [isRequested, setRequest] = useState(false);
+
+    const [item, setItem] = useState(null);
+    const [isRequested, setRequested] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     function formatDate(timestamp) {
         if (timestamp && timestamp.seconds) {
-            // Convert seconds to milliseconds to create a Date object
             const date = new Date(timestamp.seconds * 1000);
             const options = { year: 'numeric', month: 'short', day: 'numeric' };
-            return date.toLocaleDateString('en-US', options); // Format to "Dec 12, 2024"
+            return date.toLocaleDateString('en-US', options);
         }
         return "Invalid Date";
     }
 
-    useEffect(()=>{
-        //check if the product we see currently, we sent claim request for it or not
-      async function isClaimRequestSent() {
-        try{
-            const response = await fetch("http://localhost:9000/user/isrequested", {
+    useEffect(() => {
+        async function fetchItemDetails() {
+            console.log("Fetching item details for ID:", itemId);
+            try {
+                const res = await fetch(`http://localhost:9000/product/item/${itemId}`);
+                const data = await res.json();
+                setItem(data.item);
+            } catch (error) {
+                console.error("Error fetching item:", error);
+            }
+        }
+
+        async function checkIfRequested() {
+            try {
+                const res = await fetch("http://localhost:9000/user/isrequested", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        currUserDocId: currUserId,
+                        itemDocId: itemId,
+                    }),
+                });
+                const data = await res.json();
+                setRequested(data.exists);
+            } catch (error) {
+                console.error("Error checking request:", error);
+            }
+        }
+
+        if (itemId && currUserId) {
+            Promise.all([fetchItemDetails(), checkIfRequested()]).then(() => {
+                setLoading(false);
+            });
+        }
+    }, [itemId, currUserId]);
+
+    async function sendClaimRequest() {
+        try {
+            const res = await fetch("http://localhost:9000/user/claim", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json", 
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     currUserDocId: currUserId,
-                    itemDocId: item?.id,
+                    itemDocId: itemId,
                 }),
             });
-            const data = await response.json();
-            setRequest(data['exists']);
-        } catch(err){
-            console.log(err);
+            const data = await res.json();
+            alert("Request sent");
+            setRequested(true);
+        } catch (error) {
+            console.error("Error sending claim:", error);
         }
-      }
+    }
 
-      isClaimRequestSent();
-    }, [])
-
-    async function sendClaimRequest(itemDocId) {
-        try{
-            const response = await fetch("http://localhost:9000/user/claim", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json", 
-                },
-                body: JSON.stringify({
-                    currUserDocId: currUserId,
-                    itemDocId: itemDocId,
-                }),
-            });
-            console.log(await response.json());
-            alert("Request sent")
-        } catch(err){
-            console.log(err);
-        }
-      }
+    if (loading || !item) return <div>Loading...</div>;
 
     return (
         <div className="product">
-            {/* Product Image */}
             <div className="prod-img">
-                <img src={item?.imageUrl} alt="Product" />
+                <img src={item.imageUrl} alt="Product" />
             </div>
 
-            {/* Product Details */}
             <div className="prod-detail">
-                <span>{item?.itemType}</span>
-                <h2>{item?.title}</h2>
+                <span>{item.itemType}</span>
+                <h2>{item.title}</h2>
 
-                {/* Description */}
                 <div className="desc">
-                    <p className="itemDesc">{item?.desc}</p>
-                    <br />
-                    <details>
-                        <summary>Location</summary>
-                        <p>{item?.location}</p>
-                    </details>
+                    <p className="itemDesc">{item.desc}</p>
                     <details>
                         <summary>Found Date</summary>
-                        <p>{formatDate(item?.date)}</p>
+                        <p>{formatDate(item.date)}</p>
                     </details>
                 </div>
 
-                {
-                    isRequested === true ? <button disabled>Requested</button>
-                    : <button onClick={(e) => sendClaimRequest(item?.id)}>Send Claim Request</button>
-                }
+                {isRequested ? (
+                    <button disabled style={{ cursor: "default" }}>
+                        Requested
+                    </button>
+                ) : (
+                    <button onClick={sendClaimRequest}>Send Claim Request</button>
+                )}
             </div>
         </div>
     );

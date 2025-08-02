@@ -71,6 +71,14 @@ function Found() {
             }
             const data = await response.json();
             console.log(data);
+            
+            // Update the item status in the state
+            setItems((prevItems) =>
+            prevItems.map((item) =>
+                item.id === id ? { ...item, status: "returned" } : item
+            )
+        );
+
         } catch (err) {
             console.log(err);
         }
@@ -104,14 +112,6 @@ function Found() {
                         type="text"
                         onChange={(e) => setSearch(e.target.value)}
                     />
-                    <i className="fas fa-bell text-xl" style={{ color: "grey", cursor: "pointer" }}></i>
-                    <img
-                        alt="User profile picture"
-                        className="rounded-full w-10 h-10"
-                        height="40"
-                        src="https://storage.googleapis.com/a1aa/image/vONPmzZ1PsrPGdfJCdYZ0iUJp4UfhOTacfBoU1iehUOBeoufE.jpg"
-                        width="40"
-                    />
                 </div>
             </div>
             <div className="flex items-center mb-6">
@@ -120,11 +120,6 @@ function Found() {
                     onChange={(e) => setDate(e.target.value)}
                     type="date"
                 />
-                <div className="flex space-x-4">
-                    <span className="text-yellow-500">Pending</span>
-                    <span className="text-green-500">Processing</span>
-                    <span className="text-red-500">Cancel</span>
-                </div>
             </div>
             <div className="mb-6">
                 {
