@@ -5,6 +5,10 @@
 * {
   font-family: "DM Sans",sans-serif;
 }
+style h2{
+  font-size: none;
+  font-weight: none;
+}
 body {
   margin: 0;
   padding: 0;
