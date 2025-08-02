@@ -46,7 +46,6 @@ function MyLostReports() {
 
       </div>
       <div className="myReports"> 
-
       {
         items.length == 0 ? <div style={{width: "100%", height:"300px", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "20px"}}>
           <p>No Reports Found!</p>
