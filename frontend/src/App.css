@@ -1,5 +1,12 @@
 .App{
   color: white;
+  background-color: rgb(20, 20, 20);
+  font-family: "DM Sans", sans-serif;
+  margin-left: 56px;
+  margin-right: 56px;
+}
+h2{
+  font-size: 26px;
 }
 .cards{
   display: flex;

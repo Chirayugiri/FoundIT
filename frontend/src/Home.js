@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Bar from './components/Bar';
 import Category from './components/Category';
 import Footer from './components/Footer';
-import ProductCard from "./components/ProductCard"
+import ProductCard from "./components/ProductCard";
 import { Link } from 'react-router-dom';
 import Hero from './components/Hero';
 import Loader from './components/Loader';
-
 
 function Home() {
     const [items, setItems] = useState([]);

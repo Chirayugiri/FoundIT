@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 function Navbar() {
     return (
         <div>
-            <header className="bg-gray-50 navbar">
+            <header className="navbar">
                 <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                     <div className="text-2xl font-bold text-blue-600">
                         FoundIT
